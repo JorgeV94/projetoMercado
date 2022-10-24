@@ -1,0 +1,9 @@
+To Do: Completar a leitura de arquivo no teste de unidade
+
+TESTE DE SERVIÇO / API / WEB SERVICES
+
+-Objetivo: Testar a comunicação e processamento entre APIs / Serviços 
+
+CSV (Comma Separeted Values - Valores Separados por Virgula)
+XML (eXtensible Markup Language - Linguagem de Marcação Fléxivel )
+JSON (JavaScript Object Notation)
