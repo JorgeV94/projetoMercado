@@ -1,0 +1,18 @@
+{
+    "id": 7569982,
+    "category": {
+      "id": 1,
+      "name": "Cat"
+    },
+    "name": "Miau",
+    "photoUrls": [
+      "string"
+    ],
+    "tags": [
+      {
+        "id": 0,
+        "name": "Vaccinated"
+      }
+    ],
+    "status": "available"
+  }
