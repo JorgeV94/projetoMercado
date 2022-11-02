@@ -31,5 +31,46 @@ describe("PetStore Swagger - Pet",() => {
             });
     });
 
-});
+    //Consulta o animal pelo seu petID
+    it("Get Pet", () => {
+        return request                //chamada para a requisição
+            .get("/pet/" + petId)     //consultar o animal pelo id
+            .then((response)=>{       //tratar a resposta/retorno  
+                 assert.equal(response.statusCode, 200);
+                 assert.equal(response.body.id, petId);
+                 assert.equal(response.body.name, "Miau");   
+                 assert.equal(response.body.status, "available");
+            })
+
+    });
+
+    // Alterar dados do animal
+    it("Put Pet",() => {
+        //apontar para o arquivo jason com a alteração desejada
+        const jsonFile = require("../../vendors/json/pet2.json");
+
+        return request               //realizar a requisição
+            .put("/pet")            //alterar o animal - aponta para o endpoint
+            .send(jsonFile)         //json com a alteração
+            .then((response)=>{     // receber e validar a resposta
+                assert.equal(response.statusCode, 200);
+                assert.equal(response.body.id, petId);
+                assert.equal(response.body.name, "Miau");
+                assert.equal(response.body.tags[1].id, 4);
+                assert.equal(response.body.tags[1].name, "Castrated");
+                assert.equal(response.body.status, "solded");
+            });//fecha o then
+
+
+    });//fecha o it
+
+    //Deletar os dados do animal
+    it("Delet Pet",() => {
+        return request
+            .delete("/pet/" + petId)
+            .then((response) => {
+                assert.equal(response.statusCode, 200);
+            });            
+    });//fecha o it
+});//fecha o describe
 
