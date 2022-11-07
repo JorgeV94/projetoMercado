@@ -10,6 +10,7 @@ const petId = 7569982; //codigo do animal
 
 describe("PetStore Swagger - Pet",() => {
     const request = supertest(baseUrl);
+    const pets = require("../../vendors/json/petn");
 
     //Post - teste de incluir um animal
     it("Post Pet", () => {
@@ -72,4 +73,20 @@ describe("PetStore Swagger - Pet",() => {
                 assert.equal(response.statusCode, 200);
             });            
     });//fecha o it
+
+    //Função de carga de animais - Setup
+    pets.array.forEach(({nomePet,idPet,nomeCategoria,idCategoria})=>{
+        it("Setup Swagger - Add Pets",() => {
+            pet.id = idPet
+            pet.name = nomePet
+            pet.category = idCategoria
+            pet.category.name = nomeCategoria
+
+            return request
+                   .post("/pet")
+                   .send(pet)
+
+        });//Fecha o it
+    });//Fecha o forEach
+   
 });//fecha o describe
