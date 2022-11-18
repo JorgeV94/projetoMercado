@@ -22,7 +22,7 @@ test("Somar 5 + 7",()=>{
     const resultadoAtual = calculadora.somarDoisNumeros(num1,num2)
 
     //3-Valida
-    expect(resultadoAtual).toBe(resultadoEsperado);
+    expect(resultadoAtual).toBe(resultadoEsperado);//é igual o assert
 
 })
 
