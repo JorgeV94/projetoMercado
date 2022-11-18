@@ -1,14 +1,15 @@
 //Bibliotecas
-const { Builder } = require('selenium-webdriver')
+const { Builder,By } = require('selenium-webdriver')
 require('chromedriver')
 const assert = require('assert')
+const { addConsoleHandler } = require('selenium-webdriver/lib/logging')
 
 // suite de teste
 describe('Comprar Passagem WD', () =>{
     let driver // objeto para ser o selenium
 
     //Inicialização
-    beforEach('',async() => { // async function()
+    beforeEach(async() => { // async function()
         driver = await new Builder()
             .forBrowser('chrome')
             .build()
@@ -16,7 +17,7 @@ describe('Comprar Passagem WD', () =>{
         driver.manage().window().maximize()
     })
     //Finalização
-    afterEach('',async() => {
+    afterEach(async() => {
         await driver.quit()
     })
     //Teste
@@ -29,8 +30,18 @@ describe('Comprar Passagem WD', () =>{
         }
         {
             const dropdown = await driver.findElement(By.name('toPort'))
-            await dropdown.findElement(By.xpath("//option[. = 'Cairo]")).click()
+            await dropdown.findElement(By.xpath("//option[. = 'Cairo']")).click()
         }
 
+        //clicar no botão Find Flights (Procurar Voos)
+        await driver.findElement(By.css('input.btn.btn-primary')).click()
+
+        //validar o titulo da guia e a frase de titulo da seleção dos vôos
+        console.log("Get Title = " + await driver.getTitle()) // escreve no terminal o que está no getTitle
+
+        // validar o titulo da guia e a frase de titulo da seleção dos vôos
+        assert(await driver.getTitle() == 'BlazeDemo - reserve')
+        assert(await driver.findElement(By.xpath('//h3')).getText() == 'Flights from São Paolo to Cairo:')
+        
     })
 })
